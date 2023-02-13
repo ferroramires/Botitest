@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.utils.dates import days_ago
 from airflow.operators import python_operator
 from airflow.contrib.operators.bigquery_operator import BigQueryOperator
-
+#default args for our dag
 default_args = {
     'owner': 'Felipe',
     'depends_on_past': False,
@@ -16,7 +16,8 @@ default_args = {
     'retries': 3,
     'retry_delay': timedelta(minutes=1)
 }
-
+#basica dag config, runs everyday(could use crontab scheduling), and is paused uppon creation to further validate dag
+#and save resources before running it.
 with DAG(
         'ingestao_raw_test_2',
         schedule_interval=timedelta(days=1),
@@ -24,6 +25,7 @@ with DAG(
         is_paused_upon_creation=True,
         description='Data ingestion dag to BQ'
 ) as dag:
+#Ingestion function is used to load xlxs files, convert them to dataframes and insert data into a bigquery table
     def ingestion():
         table_id = 'raw.dado_vendas'
 
@@ -49,6 +51,8 @@ with DAG(
 
         non_dupe_data.to_gbq(table_id, if_exists='replace')
 
+#Apply_procedures function applies a SQL Procedure to our big query data, creating an example of silver and gold
+# environments and creating its respective tables. Ex: a working table and other tables with business rules applied.
 
     def apply_procedures(task, procedure):
         create_tables = BigQueryOperator(
@@ -60,7 +64,7 @@ with DAG(
 
         return create_tables
 
-
+#Dag tasks running the mentioned functions alongside their respective operators.
     raw_data_ingestion = python_operator.PythonOperator(
         task_id='Raw_Data_Ingestion',
         python_callable=ingestion)
