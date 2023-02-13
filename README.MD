@@ -1,9 +1,6 @@
 # Teste técnico Boticario - Data engineer
 
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-
 <img src="Architecture.png" alt="Diagram">
 
 > Nesse projeto passaremos pela proposta de arquitetura em nuvem para streaming/batch processing dentro do Google Cloud Platform
