@@ -19,6 +19,7 @@ Possíveis melhorias no código e no pipeline:
 - [ ] Adicionar manipulação de arquivos para ter histórico + backups case seja necessário reprocessamento. EX: Landing -> Archive -> Processed/Error
 - [ ] Compartimentalizar melhor as funções em arquivos "de função" para serem carregados como pacotes/libs
 - [ ] Finalizar DAG twitter assim que liberada a conta de desenvolvedor
+- [ ] Possível inclusão de spark/dataproc em caso de maior volume de dados
 
 ## 💻 Pré-requisitos
 
